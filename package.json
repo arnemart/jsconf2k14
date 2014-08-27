@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "array-shuffle": "^1.0.0",
+        "slid.js": "^0.1.2",
+        "sync-prompt": "^0.4.1"
+    }
+}
