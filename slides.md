@@ -156,6 +156,8 @@ A programming language designed to be impractical
 
 # Let's have a look then
 
+> [Demo and code walkthrough of befungius]
+
 ----
 
 ~
@@ -223,6 +225,8 @@ A programming language designed to be impractical
 ~
 
 # Let's implement it!
+
+> [Live implementation of a simple thue interpreter]
 
 ----
 
