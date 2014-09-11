@@ -18,7 +18,8 @@ Boost Communications
 
 > Hello everyone! Thank you all for being here and not at the other talk which
 > probably will be much more interesting. My name is Arne Martin, I work for a
-> small company in Trondheim, Norway.
+> small company in Trondheim, Norway, and I'm here to talk about programming
+> languages.
 
 
 ----
@@ -50,10 +51,11 @@ Boost Communications
 ~A programming language designed to be impractical
 
 
-> Programming shouldn't be all business. It should also be fun. Esotering
-> programming languages are often great examples of this. They are often written
-> just for fun or to prove a point, and are in almost all cases completely
-> useless for any practical purpose. That's what make them so great.
+> Programming shouldn't be all business. It should also be fun. Esoteric
+> programming languages are often great examples of this. They are often
+> written just for fun or to prove a point, and are in almost all cases
+> completely useless for any practical purpose. That's what make them so
+> great.
 
 
 ----
@@ -85,8 +87,8 @@ Boost Communications
 ```
 > Now this is created explicitly to be hard to write. Probably the hardest
 > programming langue that exists. The instruction names are encrypted, and the
-> encryption changes with each cycle. This hello world was not "written" as much
-> as generated using brute force.
+> encryption changes with each cycle. This hello world was not "written" as
+> much as generated using brute force.
 
 --
 
@@ -112,6 +114,11 @@ Boost Communications
 - Have some fun, write some sloppy code
 --
 - Reason about programming in new ways
+
+> My main answer is why not! It's fun!
+> Write some crazy code, break something.
+> It will also maybe even teach you something about programming
+> and allow you to reason about code in a different way.
 
 ----
 
@@ -140,7 +147,8 @@ Boost Communications
 > I have no knowledge or education about how things like this should actually
 > be done, and I have never done anything like this in production code.
 > But that is part of the fun! Try to figure out how to solve
-> interesting problems in interesting ways, make your own path.
+> interesting problems in interesting ways, make your own path, reinvent
+> all sorts of wheels.
 
 > When I write fun code that will never end up in production,
 > I rarely write comments, I rarely handle errors well (or at all),
@@ -164,11 +172,12 @@ Boost Communications
 > No variables, all state is placed on an implicit stack
 --
 - Reflective
-> Programs can rewrite their own source code at runtime
+> Programs can not only read but rewrite their own source code at runtime
 --
 - Multi-dimensional
-> Programs consist of single-character commands on a grid, and an instruction
-> pointer moving along the grid in any direction.
+> Programs consist of single-character instruction on a grid, and a pointer
+> moving along the grid in any direction and executing instructions as it
+> goes.
 --
 - Described as “a cross between Forth and Lemmings”
 > Which is fairly apt
@@ -177,7 +186,8 @@ Boost Communications
 > As will become obvious in a moment
 --
 - Completely useless
-
+--
+- Fun!
 
 ----
 
@@ -185,25 +195,35 @@ Boost Communications
 
 # Let's have a look then
 
+--
+
+```#!
+osascript -e "tell application \"Google Chrome Canary\" to activate"
+```
+
 > First a few examples
+
+> Aside: This web thing is made with react, which is super awesome for things
+> like this. Give it a program state and render it, give it a new program
+> state and re-render for every step.
 
 > Hello world pushes each character onto the stack in reverse order, then
 > goes through a loop to print it out, 0 exits the loop.
 
-> You all know fizzbuzz, right? It should print the numbers 1 to 100, but if the
-> number is divisible by 3, print "fizz" instead of the number, if divisible by
-> 5 print buzz, if by both print "fizzbuzz"
-> Fizzbuzz starts at 0, adds one, checks if the number % 3 or 5 is 0, and prints
-> the correct thing.
+> You all know fizzbuzz, right? It should print the numbers 1 to 100, but if
+> the number is divisible by 3, print "fizz" instead of the number, if
+> divisible by 5 print buzz, if by both print "fizzbuzz"
+> Fizzbuzz starts at 0, adds one, checks if the number % 3 or 5 is 0, and
+> prints the correct thing.
 
-> "Print and rewrite" demonstrates the reflection in befunge. Pay attention to
-> the number on the top left.
+> "Count and rewrite" demonstrates the reflection in befunge. Pay attention
+> to the number on the top left.
 
 > The quine reads its own source code one char at a time and prints it out,
 > exiting when it hits a space.
 
-> The "weird recursive quine" writes its own source code into the next line in
-> the program, then moves down and repeats.
+> The "weird recursive quine" writes its own source code into the next line
+> in the program, then moves down and repeats.
 
 
 > Okay so the source code
@@ -217,14 +237,14 @@ Boost Communications
 > The main "meat" is in the interpreter. This uses a multimethod that has an
 > implemtation of each befunge instruction. Each method receives the full
 > program state, and returns a new program state with its changes applied,
-> whatever they may be. A multimethod is basically a function that has different
-> implementation based on its arguments, so it's kinda like a functional switch-
-> statement.
+> whatever they may be. A multimethod is basically a function that has
+> different implementation based on its arguments, so it's kinda like a
+> functional switch-statement.
 
-> Everything uses the facebook immutable data structures library, because that
-> was new and shiny when I started this. That's also what makes the "step back"
-> button in the web version work so well. It is probably a terrible idea when it
-> comes to memory usage though.
+> Everything uses the facebook immutable data structures library, because
+> that was new and shiny when I started this. That's also what makes the
+> "step back" button in the web version work so well. It is probably a
+> terrible idea when it comes to memory usage though.
 
 ----
 
@@ -265,18 +285,22 @@ Boost Communications
 
 # Thue
 
-~
 
 > A program consists of several rules of the type
 
 --
     left side::=right side
 --
-    a::=b
+    a::=:::
+--
+    b::=~helloooo
 --
     ::=
 --
     a
+
+> ::: in rhs means get input
+> if rhs starts with ~, print the rest and return empty string
 
 > Followed by an empty statement to indicate that the statement list is done
 > Followed by the programs initial state
@@ -294,6 +318,12 @@ Boost Communications
 ~
 
 # Let's implement it!
+
+--
+
+```#!
+e ~/jsconf2k14/thue-demo-1.js
+```
 
 > [Live implementation of a simple thue interpreter]
 
