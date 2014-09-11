@@ -18,50 +18,57 @@ function parse(str) {
         state: '',
         exhausted: false
     };
+
     try {
         // Strip blank lines and comments
         str = str.replace(/^(#::=.*)?$\n/mg, '');
+
         // Split rules part from initial state part
         var parts = str.split('\n::=\n');
         program.state = parts[1];
+
         // Split all lines on ::= and add them as rules
-        parts[0].split('\n').forEach(function(line) {
+        program.rules = parts[0].split('\n').map(function(line) {
             var index = line.indexOf('::=');
-            program.rules.push([line.slice(0, index), line.slice(index + 3)]);
+            return [line.slice(0, index), line.slice(index + 3)];
         });
     } catch (e) {
         throw new Error('Hm, does not seem to be a valid program');
     }
+
     return program;
 }
 
 // Apply a single rule to a state
 function applyRule(state, rule) {
-    if (rule[1] == ':::') {
+    var rhs = rule[1];
+
+    if (rhs == ':::') {
         // Get input
-        return state.split(rule[0]).join(prompt('Input: '));
-    } else if (rule[1].match(/^~/)) {
+        rhs = prompt('Input: ');
+    } else if (rhs.match(/^~/)) {
         // Print output
-        var output = rule[1].slice(1) || '\n';
+        var output = rhs.slice(1) || '\n';
         process.stdout.write(output);
-        return state.split(rule[0]).join('');
-    } else {
-        // Apply rule normally
-        return state.split(rule[0]).join(rule[1]);
+        rhs = '';
     }
+
+    return state.split(rule[0]).join(rhs);
 }
 
 // Find the next rule to run
 function step(program) {
     var rules = shuffle(program.rules);
+
     program.exhausted = true;
-    for (var i = 0; i < rules.length; i++) {
-        if (program.state.indexOf(rules[i][0]) > -1) {
-            program.state = applyRule(program.state, rules[i]);
+
+    rules.forEach(function(rule) {
+        if (program.state.indexOf(rule[0]) > -1) {
+            program.state = applyRule(program.state, rule);
             program.exhausted = false;
-            break;
         }
-    }
+    });
+
     return program;
 }
 
