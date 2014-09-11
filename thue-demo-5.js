@@ -1,6 +1,5 @@
 var fs = require('fs');
 var shuffle = require('array-shuffle');
-var prompt = require('sync-prompt').prompt;
 
 function parse(str) {
     var program = {
@@ -20,16 +19,7 @@ function parse(str) {
 }
 
 function applyRule(state, rule) {
-    var rhs = rule[1];
 
-    if (rhs == ':::') {
-        rhs = prompt('Input: ');
-    } else if (rhs.match(/^~/)) {
-        var output = rhs.slice(1) || '\n';
-        process.stdout.write(output);
-        rhs = '';
-    }
-    return state.split(rule[0]).join(rhs);
 }
 
 function step(program) {

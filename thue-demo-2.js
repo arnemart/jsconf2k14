@@ -1,8 +1,11 @@
 var fs = require('fs');
-var shuffle = require('array-shuffle');
-var prompt = require('sync-prompt').prompt;
 
 function parse(str) {
+    var program = {
+        rules: [],
+        state: '',
+        exhausted: false
+    };
 
 }
 
@@ -18,6 +21,6 @@ function run(program) {
 
 }
 
-var programString = fs.readFileSync(args[0]).toString();
+var programString = fs.readFileSync(process.argv[2]).toString();
 
 run(parse(programString));
