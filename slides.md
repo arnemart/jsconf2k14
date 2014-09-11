@@ -15,6 +15,12 @@
 Boost Communications
 @arnemart
 
+
+> Hello everyone! Thank you all for being here and not at the other talk which
+> probably will be much more interesting. My name is Arne Martin, I work for a
+> small company in Trondheim, Norway.
+
+
 ----
 
 ~
@@ -25,7 +31,11 @@ Boost Communications
 
 --
 
-An esoteric programming language
+~An esoteric programming language
+
+> My talk is about why you should try to write your own completely impractical
+> implementation of an esoteric programming language
+
 
 ----
 
@@ -37,11 +47,21 @@ An esoteric programming language
 
 --
 
-A programming language designed to be impractical
+~A programming language designed to be impractical
+
+
+> Programming shouldn't be all business. It should also be fun. Esotering
+> programming languages are often great examples of this. They are often written
+> just for fun or to prove a point, and are in almost all cases completely
+> useless for any practical purpose. That's what make them so great.
+
 
 ----
 
 ~
+
+> Here are a couple of somewhat well-known examples
+
 
 --
 
@@ -51,8 +71,9 @@ A programming language designed to be impractical
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>
 ---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
-> Made to be super simple. Well, the concept is simple, using it is
+> Made to be super simple and minimal. Well, the concept is simple, using it is
 > aything but. Nothing but explicit pointer manipulation, incr/decr.
+> It is so minimal that compilers have been written for it in less than 200B.
 
 --
 
@@ -63,7 +84,9 @@ A programming language designed to be impractical
 `CB]V?Tx<uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj"Fhg${z@>
 ```
 > Now this is created explicitly to be hard to write. Probably the hardest
-> programming langue that exists. The instruction names change with each cycle.
+> programming langue that exists. The instruction names are encrypted, and the
+> encryption changes with each cycle. This hello world was not "written" as much
+> as generated using brute force.
 
 --
 
@@ -73,7 +96,8 @@ A programming language designed to be impractical
 
 ![20](piet.png)
 
-> Very nice and calming.
+> Who says programming has to be about text? Piet can be written in an image
+> editor.
 
 ----
 
@@ -109,20 +133,22 @@ A programming language designed to be impractical
 ~I have no idea what I'm doing
 
 > By watching this presentation you implicitly agree that you will never
-> use code or techniques that you see in production
+> use any code, techniques, concepts or idioms contained herein for anything
+> resembling actual "work".
 
 
-> I have no knowledge of how things like this should actually be done
-> And I have never done anything like this in production code
+> I have no knowledge or education about how things like this should actually
+> be done, and I have never done anything like this in production code.
 > But that is part of the fun! Try to figure out how to solve
-> interesting problems in interesting ways, make your own path
+> interesting problems in interesting ways, make your own path.
 
 > When I write fun code that will never end up in production,
 > I rarely write comments, I rarely handle errors well (or at all),
-> and I never consider "production" issues. If I can solve a problem
-> using an eval() I will do so without shame.
+> and I never consider "production" issues. If I can save two lines by
+> using an eval() I will do so without hesitation.
 
 ----
+
 ~
 
 # wtf is a befunge
@@ -131,20 +157,23 @@ A programming language designed to be impractical
 
 ~
 
+> The first programming language I will demonstrate for you today is befunge.
+> Befunge is quite idiosyncratic and has a few quite unique concepts.
+
 - Stack based
 > No variables, all state is placed on an implicit stack
 --
 - Reflective
-> Programs can read and write their own source code
+> Programs can rewrite their own source code at runtime
 --
 - Multi-dimensional
 > Programs consist of single-character commands on a grid, and an instruction
-> pointer moving in any direction along the grid
+> pointer moving along the grid in any direction.
 --
 - Described as “a cross between Forth and Lemmings”
 > Which is fairly apt
 --
-- Super annoying
+- Super annoying to use
 > As will become obvious in a moment
 --
 - Completely useless
@@ -156,7 +185,46 @@ A programming language designed to be impractical
 
 # Let's have a look then
 
-> [Demo and code walkthrough of befungius]
+> First a few examples
+
+> Hello world pushes each character onto the stack in reverse order, then
+> goes through a loop to print it out, 0 exits the loop.
+
+> You all know fizzbuzz, right? It should print the numbers 1 to 100, but if the
+> number is divisible by 3, print "fizz" instead of the number, if divisible by
+> 5 print buzz, if by both print "fizzbuzz"
+> Fizzbuzz starts at 0, adds one, checks if the number % 3 or 5 is 0, and prints
+> the correct thing.
+
+> "Print and rewrite" demonstrates the reflection in befunge. Pay attention to
+> the number on the top left.
+
+> The quine reads its own source code one char at a time and prints it out,
+> exiting when it hits a space.
+
+> The "weird recursive quine" writes its own source code into the next line in
+> the program, then moves down and repeats.
+
+
+> Okay so the source code
+
+> The main entry point is "befunge.js", there's also "parser.js" and
+> "interpreter.js".
+
+> The parser is ridiculously simple: Split the input text into lines, split
+> each line into separate characters.
+
+> The main "meat" is in the interpreter. This uses a multimethod that has an
+> implemtation of each befunge instruction. Each method receives the full
+> program state, and returns a new program state with its changes applied,
+> whatever they may be. A multimethod is basically a function that has different
+> implementation based on its arguments, so it's kinda like a functional switch-
+> statement.
+
+> Everything uses the facebook immutable data structures library, because that
+> was new and shiny when I started this. That's also what makes the "step back"
+> button in the web version work so well. It is probably a terrible idea when it
+> comes to memory usage though.
 
 ----
 
@@ -178,8 +246,9 @@ A programming language designed to be impractical
 
 ~
 
-> "tue", not thoo-ey
-> Named after norwegian mathematician Axel Thue
+> Well, we're not done quite yet! There's one more language to look at and
+> that's Thue. (pronounced "tooeh")
+> Named after Norwegian mathematician Axel Thue.
 
 --
 - String-rewriting
@@ -227,6 +296,17 @@ A programming language designed to be impractical
 # Let's implement it!
 
 > [Live implementation of a simple thue interpreter]
+
+> Start with the parse function. We'll just assume that the input file is more
+> or less well-formed, we'll put a try-catch around it to be "safe".
+
+> Then the run-function -- just keep looping until the program is exhausted.
+
+> Then the step-function -- shuffle all rules, loop through them until one
+> matches. If none match, set program to exhausted.
+
+> Then the function to actually apply a rule to the program state.
+> Remember to check for input and output.
 
 ----
 
