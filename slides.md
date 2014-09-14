@@ -5,7 +5,11 @@
 
 ~
 
+~
+
 ~ 0"!fnoCSJ olleH">:#,_@
+
+~
 
 ~
 
@@ -21,6 +25,25 @@ Boost Communications
 > small company in Trondheim, Norway, and I'm here to talk about programming
 > languages.
 
+----
+
+~
+
+~
+
+~
+
+~**Hello JSConf!**
+
+~
+
+~
+
+~
+
+~Arne Martin Aurlien
+Boost Communications
+@arnemart
 
 ----
 
@@ -70,8 +93,8 @@ Boost Communications
 * Brainfuck
 
 ```
-++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>
----.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
+    ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>
+    ---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
 > Made to be super simple and minimal. Well, the concept is simple, using it is
 > aything but. Nothing but explicit pointer manipulation, incr/decr.
@@ -82,8 +105,8 @@ Boost Communications
 * Malbolge
 
 ```
-('&%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@>}=<M:9wv6WsU2T|nm-,jcL(I&%$#"
-`CB]V?Tx<uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj"Fhg${z@>
+    ('&%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@>}=<M:9wv6WsU2T|nm-,jcL(I&%$#"
+    `CB]V?Tx<uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj"Fhg${z@>
 ```
 > Now this is created explicitly to be hard to write. Probably the hardest
 > programming langue that exists. The instruction names are encrypted, and the
@@ -289,15 +312,15 @@ osascript -e "tell application \"Google Chrome Canary\" to activate"
 > A program consists of several rules of the type
 
 --
-    left side::=right side
+        left side::=right side
 --
-    a::=:::
+        a::=:::
 --
-    b::=~helloooo
+        b::=~helloooo
 --
-    ::=
+        ::=
 --
-    a
+        a
 
 > ::: in rhs means get input
 > if rhs starts with ~, print the rest and return empty string
@@ -363,4 +386,4 @@ e ~/jsconf2k14/thue-demo-1.js
 
 ~github.com/arnemart/jsconf2k14
 github.com/arnemart/befungius
-twitter.com/arnemart
+@arnemart
